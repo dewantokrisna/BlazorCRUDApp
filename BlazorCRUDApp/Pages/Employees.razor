@@ -1,0 +1,35 @@
+﻿@page "/employees"
+@inject BlazorCRUDApp.Data.IEmployeeService EmployeeService;
+
+<h3>Employees</h3>
+<br />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in employees)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.Name</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@code {
+    private List<BlazorCRUDApp.Data.Employee> employees;
+
+    protected override void OnInitialized()
+    {
+        employees = EmployeeService.GetEmployees();
+    }
+
+}
