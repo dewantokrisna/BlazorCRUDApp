@@ -4,12 +4,17 @@
 <h3>Employees</h3>
 <br />
 
+<a class="btn btn-dark" href="employee/0">Add Employee</a>
+<br />
+
 
 <table class="table">
     <thead>
         <tr>
             <td>Id</td>
             <td>Name</td>
+            <td></td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +23,14 @@
             <tr>
                 <td>@employee.Id</td>
                 <td>@employee.Name</td>
+                <td>
+                    <a href="employee/@employee.Id">
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-danger" @onclick="@(e=> OnDelete(employee.Id))">Delete</button>
+                </td>
             </tr>
         }
 
@@ -30,6 +43,11 @@
     protected override void OnInitialized()
     {
         employees = EmployeeService.GetEmployees();
+    }
+
+    private void OnDelete(Guid id)
+    {
+        EmployeeService.DeleteEmployee(id);
     }
 
 }
